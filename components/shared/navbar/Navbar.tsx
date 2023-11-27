@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Theme from './Theme';
+import MobileNavbar from './MobileNavbar';
+import GlobalSearch from './GlobalSearch';
 
 const Navbar = () => {
   return (
@@ -19,7 +21,7 @@ const Navbar = () => {
           Stack <span className='text-primary-500'>Query</span>
         </p>
       </Link>
-      {/* GlobalSearch  */}
+      <GlobalSearch />
       <div className='flex-between gap-5'>
         <Theme />
         <SignedIn>
@@ -35,7 +37,7 @@ const Navbar = () => {
             }}
           />
         </SignedIn>
-        {/* Mobile navbar  */}
+        <MobileNavbar />
       </div>
     </nav>
   );
