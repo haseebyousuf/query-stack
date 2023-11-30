@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { Badge } from '../ui/badge';
 type Props = {
-  _id: number;
+  _id: number | string;
   name: string;
   totalQuestions?: number;
   showCount?: boolean;
@@ -10,8 +10,8 @@ type Props = {
 
 const RenderTag = ({ _id, name, totalQuestions, showCount }: Props) => {
   return (
-    <Link href={`/tags/${_id}`} className='flex justify-between gap-2'>
-      <Badge className='subtle-medium background-light800_dark300 text-light400_light500 rounded-md border-none px-4 py-2 uppercase'>
+    <Link href={`/tags/${_id}`} className='flex justify-between gap-2 '>
+      <Badge className='subtle-medium background-light800_dark300 text-light400_light500 rounded-md border-none px-4 py-2 uppercase hover:!bg-light-700 hover:dark:!bg-dark-400 '>
         {name}
       </Badge>
       {showCount && (
