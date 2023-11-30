@@ -10,9 +10,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 // import { SignedOut } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
-import { SignedOut } from '@clerk/nextjs/app-beta/client';
 import { sidebarLinks } from '@/constants';
 import { usePathname } from 'next/navigation';
+import { SignedOut } from '@clerk/nextjs';
 const NavContent = () => {
   const pathname = usePathname();
   return (
