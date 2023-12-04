@@ -5,54 +5,56 @@ import NoResult from '@/components/shared/NoResult';
 import LocalSearch from '@/components/shared/search/LocalSearch';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
+import { getQuestions } from '@/lib/actions/question.action';
 import Link from 'next/link';
 import React from 'react';
-const questions = [
-  {
-    _id: 1,
-    title: 'How to use React Query?',
-    tags: [
-      { _id: 1, name: 'react-query' },
-      { _id: 2, name: 'react' },
-    ],
-    author: { _id: 2, name: 'John Doe', picture: '/assets/icons/avatar.svg' },
-    answers: [],
-    views: 10,
-    upvotes: 2,
-    createdAt: new Date('2021-09-03T12:00:00.000Z'),
-  },
-  {
-    _id: 2,
-    title: 'What is next.js? Why do we use it? what are the benefits?',
-    tags: [
-      { _id: 1, name: 'next' },
-      { _id: 2, name: 'js' },
-    ],
-    author: {
-      _id: 1,
-      name: 'Jawad Shakeel',
-      picture: '/assets/icons/avatar.svg',
-    },
-    answers: [],
-    views: 22,
-    upvotes: 4,
-    createdAt: new Date('2023-09-03T12:00:00.000Z'),
-  },
-  {
-    _id: 3,
-    title: 'What is virtual DOM?',
-    tags: [
-      { _id: 1, name: 'react' },
-      { _id: 2, name: 'dom' },
-    ],
-    author: { _id: 12, name: 'Faizan', picture: '/assets/icons/avatar.svg' },
-    answers: [],
-    views: 4322,
-    upvotes: 77,
-    createdAt: new Date('2021-09-03T12:00:00.000Z'),
-  },
-];
-const Home = () => {
+// const questions = [
+//   {
+//     _id: 1,
+//     title: 'How to use React Query?',
+//     tags: [
+//       { _id: 1, name: 'react-query' },
+//       { _id: 2, name: 'react' },
+//     ],
+//     author: { _id: 2, name: 'John Doe', picture: '/assets/icons/avatar.svg' },
+//     answers: [],
+//     views: 10,
+//     upvotes: 2,
+//     createdAt: new Date('2021-09-03T12:00:00.000Z'),
+//   },
+//   {
+//     _id: 2,
+//     title: 'What is next.js? Why do we use it? what are the benefits?',
+//     tags: [
+//       { _id: 1, name: 'next' },
+//       { _id: 2, name: 'js' },
+//     ],
+//     author: {
+//       _id: 1,
+//       name: 'Jawad Shakeel',
+//       picture: '/assets/icons/avatar.svg',
+//     },
+//     answers: [],
+//     views: 22,
+//     upvotes: 4,
+//     createdAt: new Date('2023-09-03T12:00:00.000Z'),
+//   },
+//   {
+//     _id: 3,
+//     title: 'What is virtual DOM?',
+//     tags: [
+//       { _id: 1, name: 'react' },
+//       { _id: 2, name: 'dom' },
+//     ],
+//     author: { _id: 12, name: 'Faizan', picture: '/assets/icons/avatar.svg' },
+//     answers: [],
+//     views: 4322,
+//     upvotes: 77,
+//     createdAt: new Date('2021-09-03T12:00:00.000Z'),
+//   },
+// ];
+const Home = async () => {
+  const result = await getQuestions({});
   return (
     <>
       <div className='flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center'>
@@ -81,8 +83,8 @@ const Home = () => {
       </div>
       <HomeFilters />
       <div className='mt-10 flex w-full flex-col gap-6'>
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
