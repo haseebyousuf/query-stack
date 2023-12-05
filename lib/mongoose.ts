@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 let isConnected: boolean = false;
 
 export const connectToDatabase = async () => {
+  // This option tells Mongoose to filter out any properties in a query that aren't defined in the schema before it sends the query to MongoDB. This can help prevent bugs and improve security.
   mongoose.set('strictQuery', true);
 
   if (!process.env.MONGODB_URL) {
