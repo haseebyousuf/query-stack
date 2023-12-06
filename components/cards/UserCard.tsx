@@ -27,6 +27,7 @@ const UserCard = async ({ user }: UserProps) => {
           width={100}
           height={100}
           quality={100}
+          priority={true}
           className='rounded-full'
         />
         <div className='mt-4 text-center'>
