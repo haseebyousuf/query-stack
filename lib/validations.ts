@@ -8,7 +8,7 @@ export const QuestionsSchema = z.object({
 
   explanation: z
     .string()
-    .min(20, { message: 'Explanation must be at least 20 characters long' }),
+    .min(50, { message: 'Explanation must be at least 50 characters long' }),
   // .max(100, { message: 'Explanation must be at most 100 characters long' }),
 
   tags: z
@@ -20,4 +20,10 @@ export const QuestionsSchema = z.object({
     )
     .min(1, { message: 'You must add at least one tag' })
     .max(3, { message: 'You can add at most 3 tags' }),
+});
+
+export const AnswerSchema = z.object({
+  answer: z
+    .string()
+    .min(50, { message: 'Answer must be at least 50 characters long' }),
 });
