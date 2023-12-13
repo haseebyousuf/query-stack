@@ -5,6 +5,7 @@ import Metric from '../shared/Metric';
 import { formatAndDivideNumber, getTimeStamp } from '@/lib/utils';
 type QuestionProps = {
   _id: number | string;
+  clerkId?: string;
   title: string;
   tags: { _id: number | string; name: string }[];
   author: {
@@ -19,6 +20,7 @@ type QuestionProps = {
 };
 const QuestionCard = ({
   _id,
+  clerkId,
   title,
   tags,
   author,
