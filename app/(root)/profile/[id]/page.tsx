@@ -35,10 +35,10 @@ const ProfilePage = async ({ params, searchParams }: URLProps) => {
               @{userInfo.user.username}
             </p>
             <div className='mt-5 flex flex-wrap items-center justify-start gap-5'>
-              {userInfo.user.portfolioWebsite && (
+              {userInfo.user.portfolio && (
                 <ProfileLink
                   imgUrl='/assets/icons/link.svg'
-                  href={userInfo.user.portfolioWebsite}
+                  href={userInfo.user.portfolio}
                   title='Portfolio'
                 />
               )}
@@ -79,7 +79,7 @@ const ProfilePage = async ({ params, searchParams }: URLProps) => {
       />
       <div className='mt-10 flex gap-10'>
         <Tabs defaultValue='top-posts' className='flex-1'>
-          <TabsList className='background-light800_dark400 min-h-[42] p-1'>
+          <TabsList className='background-light800_dark400 min-h-[42px] p-1'>
             <TabsTrigger value='top-posts' className='tab'>
               Top Posts
             </TabsTrigger>
