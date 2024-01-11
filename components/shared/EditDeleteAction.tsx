@@ -37,6 +37,8 @@ const EditDeleteAction = ({ type, itemId }: EditDeleteActionProps) => {
           onClick={handleEdit}
         />
       )}
+      {type === 'answer' && <div></div>}
+
       <Image
         src={'/assets/icons/trash.svg'}
         alt='delete'
