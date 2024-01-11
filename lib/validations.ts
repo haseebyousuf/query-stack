@@ -27,3 +27,11 @@ export const AnswerSchema = z.object({
     .string()
     .min(50, { message: 'Answer must be at least 50 characters long' }),
 });
+
+export const ProfileSchema = z.object({
+  name: z.string().min(5).max(50),
+  username: z.string().min(5),
+  bio: z.string().min(10).max(50),
+  portfolio: z.string().url(),
+  location: z.string().min(5).max(50),
+});
