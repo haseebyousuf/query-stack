@@ -21,15 +21,34 @@ import Answer from '@/database/answer.model';
 export async function getSavedQuestions(params: GetSavedQuestionsParams) {
   try {
     connectToDatabase();
-    const { clerkId, searchQuery } = params;
+    const { clerkId, searchQuery, filter } = params;
     const query: FilterQuery<typeof Question> = searchQuery
       ? { title: { $regex: new RegExp(searchQuery, 'i') } }
       : {};
+
+    let sortOptions = {};
+    switch (filter) {
+      case 'most_recent':
+        sortOptions = { createdAt: -1 };
+        break;
+      case 'oldest':
+        sortOptions = { createdAt: 1 };
+        break;
+      case 'most_voted':
+        sortOptions = { upvotes: -1 };
+        break;
+      case 'most_viewed':
+        sortOptions = { views: -1 };
+        break;
+      case 'most_answered':
+        sortOptions = { answers: -1 };
+        break;
+    }
     const user = await User.findOne({ clerkId }).populate({
       path: 'saved',
       match: query,
       options: {
-        sort: { createdAt: -1 },
+        sort: sortOptions,
       },
       populate: [
         { path: 'tags', model: Tag, select: '_id name' },
@@ -95,7 +114,7 @@ export async function getUserById(params: any) {
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
     connectToDatabase();
-    const { searchQuery } = params;
+    const { searchQuery, filter } = params;
     const query: FilterQuery<typeof User> = {};
     if (searchQuery) {
       query.$or = [
@@ -103,7 +122,20 @@ export async function getAllUsers(params: GetAllUsersParams) {
         { username: { $regex: new RegExp(searchQuery, 'i') } },
       ];
     }
-    const users = await User.find(query).sort({ createdAt: -1 });
+
+    let sortOptions = {};
+    switch (filter) {
+      case 'new_users':
+        sortOptions = { joined: -1 };
+        break;
+      case 'old_users':
+        sortOptions = { joined: 1 };
+        break;
+      case 'top_contributors':
+        sortOptions = { reputation: -1 };
+        break;
+    }
+    const users = await User.find(query).sort(sortOptions);
     return { users };
   } catch (error) {
     console.log(error);
