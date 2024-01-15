@@ -232,7 +232,7 @@ export async function getUserQuestions(params: GetUserStatsParams) {
     const userQuestions = await Question.find({ author: userId })
       .skip(skipAmount)
       .limit(pageSize)
-      .sort({ views: -1, upvotes: -1 })
+      .sort({ createdAt: -1, views: -1, upvotes: -1 })
       .populate('tags', '_id name')
       .populate('author', '_id clerkId name picture');
 
