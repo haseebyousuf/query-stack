@@ -81,7 +81,7 @@ const AnswerForm = ({ question, questionId, authorId }: AnswerFormProps) => {
       const aiAnswer = await response.json();
 
       // convert plaintext to html
-      const formattedAnswer = aiAnswer.reply.replace(/\n/g, '<br />');
+      const formattedAnswer = aiAnswer?.reply?.replace(/\n/g, '<br />');
       if (editorRef.current) {
         const editor = editorRef.current as any;
         editor.setContent(formattedAnswer);
@@ -89,7 +89,7 @@ const AnswerForm = ({ question, questionId, authorId }: AnswerFormProps) => {
 
       //  toast notification
       return toast({
-        title: `${aiAnswer.reply && 'Ai answer generated'}`,
+        title: `${aiAnswer?.reply && 'Ai answer generated'}`,
         description: 'Ai answer generated successfully',
       });
     } catch (error: any) {
