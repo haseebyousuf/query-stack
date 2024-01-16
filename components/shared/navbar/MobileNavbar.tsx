@@ -79,7 +79,7 @@ const MobileNavbar = () => {
             alt='QueryStack'
           />
           <p className='h2-bold text-dark100_light900 font-spaceGrotesk'>
-            Stack <span className='text-primary-500'>Query</span>
+            Query <span className='text-primary-500'>Stack</span>
           </p>
         </Link>
         <div>
