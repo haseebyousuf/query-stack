@@ -4,6 +4,7 @@ import { deleteQuestion } from '@/lib/actions/question.action';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
+import { toast } from '../ui/use-toast';
 
 type EditDeleteActionProps = {
   type: string;
@@ -20,8 +21,16 @@ const EditDeleteAction = ({ type, itemId }: EditDeleteActionProps) => {
   const handleDelete = async () => {
     if (type === 'question') {
       await deleteQuestion({ questionId: JSON.parse(itemId), path: pathname });
+      toast({
+        title: 'Question Deleted',
+        variant: 'destructive',
+      });
     } else if (type === 'answer') {
       await deleteAnswer({ answerId: JSON.parse(itemId), path: pathname });
+      toast({
+        title: 'Answer Deleted',
+        variant: 'destructive',
+      });
     }
   };
 
