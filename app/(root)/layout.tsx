@@ -3,6 +3,7 @@ import RightSidebar from '@/components/shared/RightSidebar';
 import Navbar from '@/components/shared/navbar/Navbar';
 import React from 'react';
 import { Toaster } from '@/components/ui/toaster';
+import Link from 'next/link';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -17,6 +18,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <RightSidebar />
       </div>
       <Toaster />
+      <div className='mt-1 flex h-8 justify-center'>
+        <p className='font-spaceGrotesk text-sm font-bold text-dark-100 dark:text-light-900'>
+          Made with ❤️ by{' '}
+          <Link className='text-primary-500' href={'https://www.haseebs.tech/'}>
+            Haseeb Yousuf
+          </Link>
+        </p>
+      </div>
     </main>
   );
 };
