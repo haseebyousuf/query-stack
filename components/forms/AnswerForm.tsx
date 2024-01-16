@@ -79,22 +79,24 @@ const AnswerForm = ({ question, questionId, authorId }: AnswerFormProps) => {
         }
       );
       const aiAnswer = await response.json();
-      if (aiAnswer.error) {
-        throw new Error('Server error');
-      }
+
+      // convert plaintext to html
       const formattedAnswer = aiAnswer.reply.replace(/\n/g, '<br />');
       if (editorRef.current) {
         const editor = editorRef.current as any;
         editor.setContent(formattedAnswer);
-        toast({
-          title: 'AI Answer Generated',
-          variant: 'default',
-        });
       }
+
+      //  toast notification
+      return toast({
+        title: `${aiAnswer.reply && 'Ai answer generated'}`,
+        description: 'Ai answer generated successfully',
+      });
     } catch (error: any) {
-      toast({
-        title: error,
+      return toast({
+        title: `${error?.message}`,
         variant: 'destructive',
+        description: `${error?.code}`,
       });
     } finally {
       setIsSubmittingAI(false);
