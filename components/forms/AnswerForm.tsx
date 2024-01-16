@@ -17,6 +17,7 @@ import { Button } from '../ui/button';
 import Image from 'next/image';
 import { createAnswer } from '@/lib/actions/answer.action';
 import { usePathname } from 'next/navigation';
+import { toast } from '../ui/use-toast';
 
 interface AnswerFormProps {
   question: string;
@@ -46,13 +47,20 @@ const AnswerForm = ({ question, questionId, authorId }: AnswerFormProps) => {
         question: JSON.parse(questionId),
         path: pathname,
       });
+      toast({
+        title: 'Answer Added',
+        variant: 'default',
+      });
       form.reset();
       if (editorRef.current) {
         const editor = editorRef.current as any;
         editor.setContent('');
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast({
+        title: error,
+        variant: 'destructive',
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -78,9 +86,16 @@ const AnswerForm = ({ question, questionId, authorId }: AnswerFormProps) => {
       if (editorRef.current) {
         const editor = editorRef.current as any;
         editor.setContent(formattedAnswer);
+        toast({
+          title: 'AI Answer Generated',
+          variant: 'default',
+        });
       }
-    } catch (error) {
-      alert(error);
+    } catch (error: any) {
+      toast({
+        title: error,
+        variant: 'destructive',
+      });
     } finally {
       setIsSubmittingAI(false);
     }
