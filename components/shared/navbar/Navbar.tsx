@@ -17,7 +17,7 @@ const Navbar = () => {
           alt='QueryStack'
         />
         <p className='h2-bold font-spaceGrotesk text-dark-100 dark:text-light-900 max-sm:hidden'>
-          Stack<span className='text-primary-500'>Query</span>
+          Query<span className='text-primary-500'>Stack</span>
         </p>
       </Link>
       <GlobalSearch />
