@@ -94,9 +94,9 @@ const AnswerForm = ({ question, questionId, authorId }: AnswerFormProps) => {
       });
     } catch (error: any) {
       return toast({
-        title: `${error?.message}`,
+        title: `ChatGPT Error`,
         variant: 'destructive',
-        description: `${error?.code}`,
+        description: `Something went wrong while generating AI answer`,
       });
     } finally {
       setIsSubmittingAI(false);
