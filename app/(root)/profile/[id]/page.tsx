@@ -12,6 +12,16 @@ import ProfileLink from '@/components/shared/ProfileLink';
 import Stats from '@/components/shared/Stats';
 import QuestionTab from '@/components/shared/QuestionTab';
 import AnswerTab from '@/components/shared/AnswerTab';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Profile | QueryStack',
+  description:
+    'A community-driven platform for asking and answering programming questions. Get help, share knowledge, and collaborate withe developers from around the world. Explore topics in web development, mobile app development, algorithms, data structures, and more.',
+  icons: {
+    icon: '/assets/images/site-logo.svg',
+  },
+};
 
 const ProfilePage = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
