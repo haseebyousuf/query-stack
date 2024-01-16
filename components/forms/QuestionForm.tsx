@@ -21,6 +21,7 @@ import { Badge } from '../ui/badge';
 import Image from 'next/image';
 import { createQuestion, editQuestion } from '@/lib/actions/question.action';
 import { usePathname, useRouter } from 'next/navigation';
+import { toast } from '../ui/use-toast';
 
 type QuestionFormProps = {
   mongoUserId: string;
@@ -62,6 +63,10 @@ const QuestionForm = ({
           content: values.explanation,
           path: pathname,
         });
+        toast({
+          title: 'Question Updated',
+          variant: 'default',
+        });
         router.push(`/question/${parsedQuestionDetails._id}`);
       } else {
         await createQuestion({
@@ -71,15 +76,15 @@ const QuestionForm = ({
           author: JSON.parse(mongoUserId),
           path: pathname,
         });
+        toast({
+          title: 'Question Added',
+          variant: 'default',
+        });
         router.push('/');
       }
-
-      // console.log(value);
-      // make api call to database
     } catch (error) {
-      setIsSubmitting(false);
     } finally {
-      console.log('s');
+      setIsSubmitting(false);
     }
   }
 
