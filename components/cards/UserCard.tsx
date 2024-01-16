@@ -46,7 +46,7 @@ const UserCard = async ({ user }: UserProps) => {
               ))}
             </div>
           ) : (
-            <Badge>No Tags Yet</Badge>
+            <Badge className='text-dark200_light900'>No Tags Yet</Badge>
           )}
         </div>
       </article>
