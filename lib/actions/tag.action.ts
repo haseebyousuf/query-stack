@@ -8,7 +8,7 @@ import {
 } from './shared.types';
 import Tag, { ITag } from '@/database/tag.model';
 import Question from '@/database/question.model';
-import { FilterQuery } from 'mongoose';
+import { FilterQuery, Types } from 'mongoose';
 
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
@@ -16,11 +16,16 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
     const { userId } = params;
     const user = await User.findById(userId);
     if (!user) throw new Error('User not found');
-    // find interactions for the user and group by tags...
-    return [
-      { _id: '1', name: 'next.js' },
-      { _id: '2', name: 'React' },
-    ];
+    // find interactions for the user and group by tags..
+    const interactions = await Question.aggregate([
+      { $match: { 'interactions.user': new Types.ObjectId(userId) } },
+      { $unwind: '$tags' },
+      { $group: { _id: '$tags', count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+      { $limit: 10 },
+    ]);
+
+    return interactions;
   } catch (error) {
     console.log(error);
     throw error;
