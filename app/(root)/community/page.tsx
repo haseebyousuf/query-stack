@@ -5,8 +5,18 @@ import LocalSearch from '@/components/shared/search/LocalSearch';
 import { UserFilters } from '@/constants/filters';
 import { getAllUsers } from '@/lib/actions/user.action';
 import { SearchParamsProps } from '@/types';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+
+export const metadata: Metadata = {
+  title: 'Community | QueryStack',
+  description:
+    'A community-driven platform for asking and answering programming questions. Get help, share knowledge, and collaborate withe developers from around the world. Explore topics in web development, mobile app development, algorithms, data structures, and more.',
+  icons: {
+    icon: '/assets/images/site-logo.svg',
+  },
+};
 
 const Community = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllUsers({
